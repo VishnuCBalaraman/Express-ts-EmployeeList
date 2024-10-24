@@ -43,51 +43,10 @@ export const postEmployee = async(req: Request, res: Response)=>{
 
 export const updateEmployee = async (req: Request, res: Response) => {
     try {
-        const emp = await Employee.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        res.json(emp);
+        const employee = await Employee.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.json(employee);
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'Error updating employee' });
+        res.status(500).json({ message: 'Error updating student' });
     }
 };
 
-
-export const deleteEmployee = async (req: Request, res: Response) => {
-    try {
-        const { id } = req.params; // Extract the employee ID from the request parameters
-
-        // Find and delete the employee by ID
-        const deletedEmployee = await Employee.findByIdAndDelete(id);
-
-        if (!deletedEmployee) {
-            return res.status(404).json({ error: 'Employee not found' }); // Handle not found case
-        }
-
-        // Send a success response
-        res.status(200).json({ message: 'Employee deleted successfully' });
-    } catch (error) {
-        console.error(error); // Log the error for debugging
-        res.status(500).json({ error: 'Error deleting employee' });
-    }
-};
-
-
-export const getAEmployee = async(req: Request, res: Response)=>{
-    try{
-        const {id}= req.params;
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(400).json({ error: 'Invalid employee ID' });
-        }
-
-        const emp = await Employee.findById(id); // Use findById to query by _id
-
-        if (!emp) {
-            return res.status(404).json({ error: 'Employee not found' }); // Handle not found case
-        }
-
-    }
-    catch(error){
-        console.error(error); // Log the error for debugging
-        res.status(500).json({ error: 'Error deleting employee' });
-    }
-}

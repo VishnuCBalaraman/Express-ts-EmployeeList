@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getAllEmployees,postEmployee,updateEmployee,deleteEmployee, getAEmployee} from '../controllers/empController';
+import { getAllEmployees,postEmployee, updateEmployee} from '../controllers/empController';
 
 const router = Router();
 
@@ -8,10 +8,10 @@ router.get('/employees', getAllEmployees);
 
 router.post('/employees', postEmployee);
 
-router.get('/employees/:id', getAEmployee);
-
 router.put('/employees/:id', updateEmployee);
 
-router.delete('/employees/:id', deleteEmployee);
+
+
+
 
 export default router;
